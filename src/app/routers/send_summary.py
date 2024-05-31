@@ -79,7 +79,6 @@ async def send_summary(
 
     send_email(
         subject=subject,
-        sender=os.environ["SENDGRID_SENDER_EMAIL"],
         recipient=recipient,
         body_content=email_body,
     )
