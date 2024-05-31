@@ -9,7 +9,7 @@ on:
       - 'templage.yml'
       - 'samconfig.toml'
 
-# jobs:
+jobs:
 #   test:
 #     runs-on: ubuntu-latest
 #     steps:
