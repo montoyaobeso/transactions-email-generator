@@ -18,7 +18,9 @@ class UploadTest(TestCase):
     @patch("src.app.email.content_builder.get_email_body")
     @patch("src.app.email.sender.send_email")
     def test_send_summary_endpoint_status_200(
-        self, get_email_body_mock, send_email_mock
+        self,
+        get_email_body_mock,
+        send_email_mock,
     ):
 
         # Mocks
@@ -48,7 +50,18 @@ class UploadTest(TestCase):
         ## check status code
         self.assertEqual(status.HTTP_200_OK, response.status_code)
 
-    def test_send_summary_status_400(self):
+    @patch("src.app.email.content_builder.get_email_body")
+    @patch("src.app.email.sender.send_email")
+    def test_send_summary_status_400(
+        self,
+        get_email_body_mock,
+        send_email_mock,
+    ):
+
+        # Mocks
+        get_email_body_mock.return_value = None
+        send_email_mock.return_value = None
+
         # Arrange
         with open("csv/transactions_with_null_values.csv", "rb") as f:
             filebody = f.read()
@@ -72,7 +85,18 @@ class UploadTest(TestCase):
         ## check status code
         self.assertEqual(status.HTTP_400_BAD_REQUEST, response.status_code)
 
-    def test_send_summary_status_400_not_csv_file(self):
+    @patch("src.app.email.content_builder.get_email_body")
+    @patch("src.app.email.sender.send_email")
+    def test_send_summary_status_400_not_csv_file(
+        self,
+        get_email_body_mock,
+        send_email_mock,
+    ):
+
+        # Mocks
+        get_email_body_mock.return_value = None
+        send_email_mock.return_value = None
+
         # Arrange
         with open("csv/transactions.txt", "rb") as f:
             filebody = f.read()
