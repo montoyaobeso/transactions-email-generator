@@ -8,6 +8,7 @@ on:
       - '.github/workflows/**'
       - 'templage.yml'
       - 'samconfig.toml'
+      - 'requirements.txt'
 
 jobs:
   test:
