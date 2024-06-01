@@ -15,20 +15,9 @@ from mock import patch
 class UploadTest(TestCase):
     client = TestClient(app)
 
-    @patch("src.app.email.content_builder.get_email_body")
-    @patch("src.app.email.sender.send_email")
-    @patch("src.app.email.sender.set_credentials_from_aws_secrets")
-    def test_send_summary_endpoint_status_200(
-        self,
-        get_email_body_mock,
-        send_email_mock,
-        set_credentials_from_aws_secrets_mock,
-    ):
-
-        # Mocks
-        get_email_body_mock.return_value = None
-        send_email_mock.return_value = None
-        set_credentials_from_aws_secrets_mock.return_value = None
+    @patch("src.app.email.content_builder.get_email_body", None)
+    @patch("src.app.email.sender.send_email", None)
+    def test_send_summary_endpoint_status_200(self):
 
         # Arrange
         with open("csv/transactions_1.csv", "rb") as f:
