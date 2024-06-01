@@ -17,9 +17,9 @@ def get_email_body(
 
     fields = {
         "client_name": client_name.title(),
-        "total_balance": f"${total_balance:.2f}",
-        "avg_debit_amount": f"${avg_debit_amount:.2f}",
-        "avg_credit_amount": f"${avg_credit_amount:.2f}",
+        "total_balance": f"${total_balance:,.2f}",
+        "avg_debit_amount": f"${avg_debit_amount:,.2f}",
+        "avg_credit_amount": f"${avg_credit_amount:,.2f}",
         "transactions_per_month": "".join(
             [
                 f'<li style="Margin:0">{month}: {count}</li>'
