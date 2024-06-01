@@ -4,7 +4,7 @@ from typing import Annotated
 
 import pandas as pd
 import pandera as pa
-from fastapi import APIRouter, File, Form, UploadFile, status
+from fastapi import APIRouter, File, Form, HTTPException, UploadFile, status
 from fastapi.responses import JSONResponse
 
 from src.app.email.content_builder import get_email_body
@@ -46,14 +46,10 @@ async def send_summary(
 
         try:
             txns = schema.validate(txns, lazy=True)
-        except pa.errors.SchemaErrors as exc:
-            print("Schema errors and failure cases:")
-            print(exc.failure_cases)
-            print("\nDataFrame object that failed validation:")
-            print(exc.data)
-            return JSONResponse(
+        except pa.errors.SchemaErrors:
+            raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
-                content={
+                detail={
                     "message": "The input file is not formated correctly, please review it."
                 },
             )
