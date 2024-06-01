@@ -2,7 +2,6 @@ import pandas as pd
 
 from unittest import TestCase
 
-from src.app.transactions.processor import TransactionsProcessor
 from src.app.email.content_builder import get_email_body
 
 

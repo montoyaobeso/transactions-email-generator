@@ -1,22 +1,20 @@
-import io
 from unittest import TestCase
+from unittest.mock import patch
 
 from fastapi import status
 from fastapi.testclient import TestClient
 
+import src.app.email.sender as sender
 from src.app.main import app
 
-from unittest.mock import patch
 
-
-from mock import patch
+def new_send_email(cls, *args, **kwargs):
+    return None
 
 
 class UploadTest(TestCase):
     client = TestClient(app)
 
-    @patch("src.app.email.content_builder.get_email_body", None)
-    @patch("src.app.email.sender.send_email", None)
     def test_send_summary_endpoint_status_200(self):
 
         # Arrange
@@ -30,30 +28,20 @@ class UploadTest(TestCase):
         }
 
         # Act
-        response = self.client.post(
-            "/send_summary",
-            data=form_data,
-            files={
-                "file": ("transactions_1.csv", filebody),
-            },
-        )
+        with patch.object(sender, "send_email", new=new_send_email):
+            response = self.client.post(
+                "/send_summary",
+                data=form_data,
+                files={
+                    "file": ("transactions_1.csv", filebody),
+                },
+            )
 
         # Assert
         ## check status code
         self.assertEqual(status.HTTP_200_OK, response.status_code)
 
-    @patch("src.app.email.content_builder.get_email_body")
-    @patch("src.app.email.sender.send_email")
-    def test_send_summary_status_400(
-        self,
-        get_email_body_mock,
-        send_email_mock,
-    ):
-
-        # Mocks
-        get_email_body_mock.return_value = None
-        send_email_mock.return_value = None
-
+    def test_send_summary_status_400(self):
         # Arrange
         with open("csv/transactions_with_null_values.csv", "rb") as f:
             filebody = f.read()
@@ -77,18 +65,7 @@ class UploadTest(TestCase):
         ## check status code
         self.assertEqual(status.HTTP_400_BAD_REQUEST, response.status_code)
 
-    @patch("src.app.email.content_builder.get_email_body")
-    @patch("src.app.email.sender.send_email")
-    def test_send_summary_status_400_not_csv_file(
-        self,
-        get_email_body_mock,
-        send_email_mock,
-    ):
-
-        # Mocks
-        get_email_body_mock.return_value = None
-        send_email_mock.return_value = None
-
+    def test_send_summary_status_400_not_csv_file(self):
         # Arrange
         with open("csv/transactions.txt", "rb") as f:
             filebody = f.read()
