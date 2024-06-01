@@ -22,7 +22,7 @@ Fields in the CSV file:
 
 Expected email format:
 
-<img src="/assets/email_example.png" alt="MarineGEO circle logo" style="height: 100px;"/>
+<img src="/assets/email_example.png" style="width: 60%;"/>
 
 
 # Local execution
