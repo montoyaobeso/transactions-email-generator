@@ -8,7 +8,7 @@ from fastapi import APIRouter, File, Form, HTTPException, UploadFile, status
 from fastapi.responses import JSONResponse
 
 from src.app.email.content_builder import get_email_body
-from src.app.email.sender import send_email
+from src.app.email.sender import SendEmailService
 from src.app.transactions.processor import TransactionsProcessor
 from src.app.validator.input_validator import schema
 
@@ -73,7 +73,7 @@ async def send_summary(
         transactions_per_month=ts.get_montly_transactions(),
     )
 
-    send_email(
+    SendEmailService().send_email(
         subject=subject,
         recipient=recipient,
         body_content=email_body,
