@@ -5,7 +5,7 @@ from fastapi import status
 from fastapi.testclient import TestClient
 
 from src.app.main import app
-import src.app.email.sender as sender
+from src.app.email.sender import SendEmailService
 
 
 def mock_send_email(cls, *args, **kwargs):
@@ -28,7 +28,7 @@ class UploadTest(TestCase):
         }
 
         # Act
-        with patch.object(sender, "send_email", new=mock_send_email):
+        with patch.object(SendEmailService, "send_email", new=mock_send_email):
             response = self.client.post(
                 "/send_summary",
                 data=form_data,
