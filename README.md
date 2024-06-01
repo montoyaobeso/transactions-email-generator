@@ -21,8 +21,7 @@ Fields in the CSV file:
 - `Transactions`: user transaction amounts, where `+` sign denotes a credit transactions and `-` sign denotes a debit transaction.
 
 Expected email format:
-
-<img src="/assets/email_example.png" style="width: 60%;"/>
+![Expected email format](/assets/email_example.png "Expected email format")
 
 
 # Local execution
