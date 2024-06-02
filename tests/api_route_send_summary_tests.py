@@ -4,7 +4,7 @@ from unittest.mock import patch
 from fastapi import status
 from fastapi.testclient import TestClient
 
-from src.app.main import app
+from src.api.main import app
 from src.app.email.sender import SendEmailService
 
 
