@@ -1,9 +1,9 @@
 version: '3.9'
 services:
-  app:
+  api:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.api
     ports:
       - "80:80"
     command:
@@ -13,11 +13,20 @@ services:
         "0.0.0.0",
         "--port",
         "80",
-        "src.app.main:app",
+        "src.api.main:app",
         "--reload",
       ]
     networks:
       - app-net
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - app-net
+    volumes:
+      - ./csv:/csv
 
 networks:
   app-net:
