@@ -13,7 +13,7 @@ Resources:
       FunctionName: "TransactionsEmailSender"
       MemorySize: 256
       CodeUri: .
-      Handler: src.app.main.handler
+      Handler: src.api.main.handler
       Runtime: python3.9
       Events:
         Api:
