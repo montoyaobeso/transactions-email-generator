@@ -69,13 +69,25 @@ Run the server in a Docker container:
  ```
  Be sure the docker daemon is running.
 
- In order to run the `uvicorn` server locally, see for changes and continue developing api features, run:
+With the image `transactions-email-generator-app` built, execute the following to process a file in a mounted directory:
+```bash
+docker run \
+    -v ./csv:/csv \
+    transactions-email-generator-app:latest \
+    --client_name "Abraham Montoya" \
+    --subject "Stori's Account Balance" \
+    --recipient "montoyaobeso@gmail.com" \
+    --path-to-file "/csv/transactions_1.csv"
+```
+
+
+ In order to run the `uvicorn` server locally, see for changes and continue developing new features, run:
 ```bash
 uvicorn src.api.main:app --reload --port 80
 ```
 
 
- If everything is working properly you should see something like:
+ If everything is working properly you should see something like this:
  ```bash
 INFO:     Will watch for changes in these directories: ['~/transactions-email-generator']
 INFO:     Uvicorn running on http://127.0.0.1:80 (Press CTRL+C to quit)
