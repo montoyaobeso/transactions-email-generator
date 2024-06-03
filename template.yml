@@ -2,6 +2,14 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: AWS Sam Template
 
+Parameters:
+  BucketName:
+    Description: "Bucket name to store files."
+    Type: "String"
+  SecretName:
+    Description: "Enail sender servide secret name."
+    Type: "String"
+
 Globals:
   Function:
     Timeout: 180
@@ -22,7 +30,9 @@ Resources:
             ApiId: !Ref Api
       Policies:
         - AWSSecretsManagerGetSecretValuePolicy:
-            SecretArn: 'arn:aws:secretsmanager:us-west-2:339713191966:secret:stori-sendgrid*'
+            SecretArn: !Sub 'arn:aws:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:${SecretName}*'
+        - S3FullAccessPolicy:
+            BucketName: !Ref BucketName
 
   Api:
     Type: AWS::Serverless::HttpApi
