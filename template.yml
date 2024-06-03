@@ -14,7 +14,7 @@ Parameters:
     Type: "String"
     Default: "stori-transactions-email-sender"
   Stage:
-    Description: "Stage name, should be dev or prod"
+    Description: "Stage name, should be dev or prod."
     Type: "String"
     AllowedValues:
       - "dev"
