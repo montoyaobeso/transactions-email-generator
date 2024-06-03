@@ -62,10 +62,10 @@ jobs:
       - name: Run SAM Deploy
         run: | 
           sam deploy \ 
-          --stack-name stori-transactions-email-sender-${{ env.ENV_STAGE }} \
           --s3-bucket ${{ secrets.AWS_ARTIFACTS_BUCKET_NAME }} \
-          --no-confirm-changeset --no-fail-on-empty-changeset \
+          --stack-name stori-transactions-email-sender-${{ env.ENV_STAGE }} \
           --parameter-overrides \
             BucketName=${{ secrets.AWS_BUCKET_NAME_FILES_PREFIX }}-${{ env.ENV_STAGE }} \
             SecretName=${{ secrets.AWS_SECRET_NAME }} \
             Stage=${{ env.ENV_STAGE }}
+          --no-confirm-changeset --no-fail-on-empty-changeset \
