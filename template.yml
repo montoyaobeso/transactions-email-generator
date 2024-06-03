@@ -1,24 +1,24 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: AWS Sam Template
+Description: Stack for Stori's Transactions Email Sender
 
 Parameters:
+  Project:
+    Description: "Project name."
+    Type: "String"
+    Default: "stori-transactions-email-sender"
+  Stage:
+    Description: "Stage name, should be dev or prod."
+    Type: "String"
+    AllowedValues:
+      - "dev"
+      - "prod"
   BucketName:
     Description: "Bucket name to store files."
     Type: "String"
   SecretName:
     Description: "Enail sender servide secret name."
     Type: "String"
-  Project:
-    Description: "Project name."
-    Type: "String"
-    Default: "stori-transactions-email-sender"
-  Stage:
-    Description: "Stage name, should be dev or prod"
-    Type: "String"
-    AllowedValues:
-      - "dev"
-      - "prod"
 
 Globals:
   Function:
@@ -33,6 +33,11 @@ Resources:
       CodeUri: .
       Handler: src.api.main.handler
       Runtime: python3.9
+      Environment:
+        Variables:
+          BUCKET_NAME: !Ref BucketName
+          SECRET_NAME: !Ref SecretName
+          STAGE: !Ref Stage
       Events:
         Api:
           Type: HttpApi
