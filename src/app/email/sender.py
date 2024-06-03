@@ -7,7 +7,7 @@ from src.app.aws.secrets import get_secret
 
 class SendEmailService:
     def set_credentials_from_aws_secrets(self):
-        secret = get_secret("stori-sendgrid")
+        secret = get_secret(os.environ["SECRET_NAME"])
         os.environ["SENDGRID_SENDER_EMAIL"] = secret["SENDGRID_SENDER_EMAIL"]
         os.environ["SENDGRID_API_KEY"] = secret["SENDGRID_API_KEY"]
 

@@ -3,12 +3,6 @@ Transform: AWS::Serverless-2016-10-31
 Description: AWS Sam Template
 
 Parameters:
-  BucketName:
-    Description: "Bucket name to store files."
-    Type: "String"
-  SecretName:
-    Description: "Enail sender servide secret name."
-    Type: "String"
   Project:
     Description: "Project name."
     Type: "String"
@@ -19,6 +13,12 @@ Parameters:
     AllowedValues:
       - "dev"
       - "prod"
+  BucketName:
+    Description: "Bucket name to store files."
+    Type: "String"
+  SecretName:
+    Description: "Enail sender servide secret name."
+    Type: "String"
 
 Globals:
   Function:
@@ -33,6 +33,11 @@ Resources:
       CodeUri: .
       Handler: src.api.main.handler
       Runtime: python3.9
+      Environment:
+        Variables:
+          BUCKET_NAME: !ref BucketName
+          SECRET_NAME: !ref SecretName
+          STAGE: !Ref Stage
       Events:
         Api:
           Type: HttpApi
@@ -42,7 +47,7 @@ Resources:
         - AWSSecretsManagerGetSecretValuePolicy:
             SecretArn: !Sub 'arn:aws:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:${SecretName}*'
         - S3FullAccessPolicy:
-            BucketName: !Ref BucketName
+            BucketName: !Sub BucketName
 
   Api:
     Name: !Sub "${Project}-${Stage}-http-api"
