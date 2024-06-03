@@ -30,7 +30,7 @@ class UploadTest(TestCase):
         # Act
         with patch.object(SendEmailService, "send_email", new=mock_send_email):
             response = self.client.post(
-                "/send_summary",
+                "/balance_by_file",
                 data=form_data,
                 files={
                     "file": ("transactions_1.csv", filebody),
@@ -54,7 +54,7 @@ class UploadTest(TestCase):
 
         # Act
         response = self.client.post(
-            "/send_summary",
+            "/balance_by_file",
             data=form_data,
             files={
                 "file": ("transactions_with_null_values.csv", filebody),
@@ -80,7 +80,7 @@ class UploadTest(TestCase):
 
         # Act
         response = self.client.post(
-            "/send_summary",
+            "/balance_by_file",
             data=form_data,
             files={
                 "file": ("transactions.txt", filebody),
