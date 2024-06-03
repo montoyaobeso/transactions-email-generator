@@ -47,9 +47,16 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
+      - name: Set environment for branch
+        run: |
+          if [[ $GITHUB_REF_NAME == 'main' ]]; then
+              echo "ENV_STAGE=prod" >> "$GITHUB_ENV"
+          else
+              echo "ENV_STAGE=dev" >> "$GITHUB_ENV"
+          fi
       # sam build
       - name: Run SAM Build
         run: sam build --use-container
       # sam deploy
       - name: Run SAM Deploy
-        run: sam deploy --s3-bucket ${{ secrets.AWS_BUCKET_NAME }} --parameter-overrides BucketName=${{ secrets.AWS_BUCKET_NAME_FILES }} SecretName=${{ secrets.AWS_SECRET_NAME }} --no-confirm-changeset --no-fail-on-empty-changeset
+        run: sam deploy --s3-bucket ${{ secrets.AWS_BUCKET_NAME }} --parameter-overrides BucketName=${{ secrets.AWS_BUCKET_NAME_FILES }} SecretName=${{ secrets.AWS_SECRET_NAME }} Stage=${{ env.ENV_STAGE}}--no-confirm-changeset --no-fail-on-empty-changeset

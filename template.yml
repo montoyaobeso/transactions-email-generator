@@ -9,6 +9,15 @@ Parameters:
   SecretName:
     Description: "Enail sender servide secret name."
     Type: "String"
+  Project:
+    Description: "Project name."
+    Type: "String"
+    Default: "stori-transactions-email-sender"
+  Stage:
+    Description: "Stage name, should be dev or prod"
+    AllowedValues:
+      - "dev"
+      - "prod"
 
 Globals:
   Function:
@@ -18,7 +27,7 @@ Resources:
   Function:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: "TransactionsEmailSender"
+      FunctionName: !Sub "${Project}-${Stage}-api"
       MemorySize: 256
       CodeUri: .
       Handler: src.api.main.handler
@@ -35,6 +44,7 @@ Resources:
             BucketName: !Ref BucketName
 
   Api:
+    Name: !Sub "${Project}-${Stage}-http-api"
     Type: AWS::Serverless::HttpApi
 
 Outputs:
