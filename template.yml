@@ -47,6 +47,7 @@ Resources:
   Api:
     Name: !Sub "${Project}-${Stage}-http-api"
     Type: AWS::Serverless::HttpApi
+    SrageName: !Ref Stage
 
 Outputs:
   ApiUrl:
