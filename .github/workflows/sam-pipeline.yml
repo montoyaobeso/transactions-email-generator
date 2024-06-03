@@ -61,8 +61,7 @@ jobs:
       # sam deploy
       - name: Run SAM Deploy
         run: | 
-          sam deploy \ 
-          --s3-bucket ${{ secrets.AWS_ARTIFACTS_BUCKET_NAME }} \
+          sam deploy --s3-bucket ${{ secrets.AWS_ARTIFACTS_BUCKET_NAME }} \
           --stack-name stori-transactions-email-sender-${{ env.ENV_STAGE }} \
           --parameter-overrides \
             BucketName=${{ secrets.AWS_BUCKET_NAME_FILES_PREFIX }}-${{ env.ENV_STAGE }} \
