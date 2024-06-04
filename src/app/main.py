@@ -1,6 +1,6 @@
 import argparse
-from src.app.email.content_builder import get_email_body
-from src.app.email.sender import SendEmailService
+from src.app.email.content_builder import EmailBodyBuilder
+from src.app.email.sender import EmailSender
 
 import src.app.exceptions as app_exceptions
 import pandas as pd
@@ -62,7 +62,7 @@ def main():
     tp = TransactionsProcessor(df)
 
     # Get email body
-    email_body = get_email_body(
+    body_builder = EmailBodyBuilder(
         client_name=args.client_name,
         total_balance=tp.get_balance(),
         avg_credit_amount=tp.get_avg_credit_amount(),
@@ -70,11 +70,13 @@ def main():
         transactions_per_month=tp.get_montly_transactions(),
     )
 
-    SendEmailService().send_email(
+    email_sender = EmailSender(
         subject=args.subject,
         recipient=args.recipient,
-        body_content=email_body,
+        body_content=body_builder.get_email_body(),
     )
+
+    email_sender.send_email()
 
     print("Email send succesfully.")
 
