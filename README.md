@@ -71,7 +71,7 @@ docker run \
     -v ./csv:/csv \
     transactions-email-generator-app:latest \
     --client_name "Abraham Montoya" \
-    --subject "Your Stori's Account Balance!" \
+    --subject "Your Account Balance" \
     --recipient "montoyaobeso@gmail.com" \
     --path-to-file "/csv/transactions_1.csv"
 ```
