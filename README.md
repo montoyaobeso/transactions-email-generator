@@ -86,6 +86,9 @@ docker run \
 
 This application is exposed through AWS API Gateway and AWS Lambda (with s3 support) to process files and send account balances to end users.
 
+**Note**: the main limitation is about API Gateway supporting files up to ~10Mb, to avoid this, the API supports uploading files separately to s3 and processing those files through a different endpoint.
+
+
 The available endpoints are as follows:
 
 | Endpoint            | Method | Description                                                                                                             | Input    | Output                                                                           |
@@ -94,7 +97,6 @@ The available endpoints are as follows:
 | /presigned_url      | GET    | Get an URL to post a file bigger than 10Mb. Note: it is required to use an external tool to post the file to s3 (i.e. Postman, or the `requests` module).                                                                            | NA       | A dict with `url` and `fields` to upload a file to s3.                           |
 | /balance_by_file_id | POST    | Post a file processing request of a previously uploaded file using the presigned URL obtained through `/presigned_url`. | `client_name`, `recipient`, `subject`, `file_id` | A message informing the email was send sucessfully, or an error message instead. |
 | /balance_by_file | POST    | Post a file processing request by providing the file (size limit is <10Mb) | `client_name`, `recipient`, `subject`, `file` | A message informing the email was send sucessfully, or an error message instead. |
-
 
 
 ## Post a file to `/balance_by_file_id` using a `presigned_url`:
