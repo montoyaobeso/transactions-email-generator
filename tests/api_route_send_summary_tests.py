@@ -33,7 +33,7 @@ class UploadTest(TestCase):
                 "/balance_by_file",
                 data=form_data,
                 files={
-                    "file": ("transactions_1.csv", filebody),
+                    "file": ("transactions_1.csv", filebody, "text/csv"),
                 },
             )
 
