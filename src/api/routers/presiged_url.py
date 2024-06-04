@@ -1,5 +1,6 @@
 import os
 import uuid
+import json
 
 from fastapi import APIRouter, status
 from fastapi.responses import JSONResponse
@@ -17,7 +18,7 @@ router = APIRouter(
 async def presigned_url():
 
     response = create_presigned_post(
-        bucket_name=os.environ["AWS_BUCKET_NAME"],
+        bucket_name=os.environ["BUCKET_NAME"],
         object_name=f"{uuid.uuid4()}.csv",
     )
 
