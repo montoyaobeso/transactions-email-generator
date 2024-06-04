@@ -7,8 +7,8 @@ import pandera as pa
 from fastapi import APIRouter, File, Form, HTTPException, UploadFile, status
 from fastapi.responses import JSONResponse
 
-from src.app.email.content_builder import get_email_body
-from src.app.email.sender import SendEmailService
+from src.app.email.content_builder import EmailBodyBuilder
+from src.app.email.sender import EmailSender
 from src.app.transactions.processor import TransactionsProcessor
 from src.app.validator.input_validator import schema
 
@@ -65,7 +65,7 @@ async def balance_by_file(
             },
         )
 
-    email_body = get_email_body(
+    body_builder = EmailBodyBuilder(
         client_name=client_name,
         total_balance=tp.get_balance(),
         avg_credit_amount=tp.get_avg_credit_amount(),
@@ -73,11 +73,13 @@ async def balance_by_file(
         transactions_per_month=tp.get_montly_transactions(),
     )
 
-    SendEmailService().send_email(
+    email_sender = EmailSender(
         subject=subject,
         recipient=recipient,
-        body_content=email_body,
+        body_content=body_builder.get_email_body(),
     )
+
+    email_sender.send_email()
 
     return JSONResponse(
         status_code=status.HTTP_200_OK,
