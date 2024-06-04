@@ -7,3 +7,4 @@ pandera==0.19.3
 sendgrid==6.11.0
 boto3==1.34.117
 botocore==1.34.117
+moto==5.0.9
