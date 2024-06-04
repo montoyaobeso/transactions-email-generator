@@ -2,8 +2,9 @@ from fastapi import FastAPI
 from mangum import Mangum
 
 from src.api.routers import root
-
-from src.api.routers import send_summary
+from src.api.routers import presiged_url
+from src.api.routers import balance_by_file
+from src.api.routers import balance_by_file_id
 
 from dotenv import load_dotenv
 
@@ -20,6 +21,8 @@ app = FastAPI(
 )
 
 app.include_router(root.router)
-app.include_router(send_summary.router)
+app.include_router(presiged_url.router)
+app.include_router(balance_by_file.router)
+app.include_router(balance_by_file_id.router)
 
 handler = Mangum(app)

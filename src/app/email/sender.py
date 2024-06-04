@@ -5,19 +5,18 @@ from sendgrid.helpers.mail import Mail, Email, To, Content
 from src.app.aws.secrets import get_secret
 
 
-class SendEmailService:
+class EmailSender:
+    def __init__(self, subject: str, recipient: str, body_content: str) -> None:
+        self.subject = subject
+        self.recipient = recipient
+        self.body_content = body_content
+
     def set_credentials_from_aws_secrets(self):
         secret = get_secret(os.environ["SECRET_NAME"])
         os.environ["SENDGRID_SENDER_EMAIL"] = secret["SENDGRID_SENDER_EMAIL"]
         os.environ["SENDGRID_API_KEY"] = secret["SENDGRID_API_KEY"]
 
-    def send_email(
-        self,
-        subject: str,
-        recipient: str,
-        body_content: str,
-    ) -> None:
-
+    def send_email(self) -> None:
         if (
             "SENDGRID_SENDER_EMAIL" not in os.environ
             or "SENDGRID_API_KEY" not in os.environ
@@ -29,9 +28,9 @@ class SendEmailService:
 
         mail = Mail(
             Email(sender),
-            To(recipient),
-            subject,
-            Content("text/html", body_content),
+            To(self.recipient),
+            self.subject,
+            Content("text/html", self.body_content),
         )
 
         mail_json = mail.get()

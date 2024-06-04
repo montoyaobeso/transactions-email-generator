@@ -5,14 +5,14 @@ from fastapi import status
 from fastapi.testclient import TestClient
 
 from src.api.main import app
-from src.app.email.sender import SendEmailService
+from src.app.email.sender import EmailSender
 
 
 def mock_send_email(cls, *args, **kwargs):
     return None
 
 
-class UploadTest(TestCase):
+class TestBalanceByFile(TestCase):
     client = TestClient(app)
 
     def test_send_summary_endpoint_status_200(self):
@@ -28,12 +28,12 @@ class UploadTest(TestCase):
         }
 
         # Act
-        with patch.object(SendEmailService, "send_email", new=mock_send_email):
+        with patch.object(EmailSender, "send_email", new=mock_send_email):
             response = self.client.post(
-                "/send_summary",
+                "/balance_by_file",
                 data=form_data,
                 files={
-                    "file": ("transactions_1.csv", filebody),
+                    "file": ("transactions_1.csv", filebody, "text/csv"),
                 },
             )
 
@@ -54,7 +54,7 @@ class UploadTest(TestCase):
 
         # Act
         response = self.client.post(
-            "/send_summary",
+            "/balance_by_file",
             data=form_data,
             files={
                 "file": ("transactions_with_null_values.csv", filebody),
@@ -80,7 +80,7 @@ class UploadTest(TestCase):
 
         # Act
         response = self.client.post(
-            "/send_summary",
+            "/balance_by_file",
             data=form_data,
             files={
                 "file": ("transactions.txt", filebody),

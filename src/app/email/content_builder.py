@@ -1,31 +1,42 @@
 from jinja2 import Environment, FileSystemLoader
 
 
-def get_email_body(
-    client_name: str,
-    total_balance: float,
-    avg_debit_amount: float,
-    avg_credit_amount: float,
-    transactions_per_month: list,
-) -> str:
+class EmailBodyBuilder:
 
-    file_loader = FileSystemLoader("src/app/templates")
+    def __init__(
+        self,
+        client_name,
+        total_balance,
+        avg_credit_amount,
+        avg_debit_amount,
+        transactions_per_month,
+    ) -> None:
 
-    env = Environment(loader=file_loader)
+        self.client_name = client_name
+        self.total_balance = total_balance
+        self.avg_credit_amount = avg_credit_amount
+        self.avg_debit_amount = avg_debit_amount
+        self.transactions_per_month = transactions_per_month
 
-    template = env.get_template("./email_body.html")
+    def get_email_body(self) -> str:
 
-    fields = {
-        "client_name": client_name.title(),
-        "total_balance": f"${total_balance:,.2f}",
-        "avg_debit_amount": f"${avg_debit_amount:,.2f}",
-        "avg_credit_amount": f"${avg_credit_amount:,.2f}",
-        "transactions_per_month": "".join(
-            [
-                f'<li style="Margin:0">{month}: {count}</li>'
-                for month, count in transactions_per_month
-            ]
-        ),
-    }
+        file_loader = FileSystemLoader("src/app/templates")
 
-    return template.render(fields)
+        env = Environment(loader=file_loader)
+
+        template = env.get_template("./email_body.html")
+
+        fields = {
+            "client_name": self.client_name.title(),
+            "total_balance": f"${self.total_balance:,.2f}",
+            "avg_debit_amount": f"${self.avg_debit_amount:,.2f}",
+            "avg_credit_amount": f"${self.avg_credit_amount:,.2f}",
+            "transactions_per_month": "".join(
+                [
+                    f'<li style="Margin:0">{month}: {count:,.0f}</li>'
+                    for month, count in self.transactions_per_month
+                ]
+            ),
+        }
+
+        return template.render(fields)

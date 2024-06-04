@@ -22,14 +22,14 @@ Parameters:
 
 Globals:
   Function:
-    Timeout: 180
+    Timeout: 500
 
 Resources:
   Function:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: !Sub "${Project}-${Stage}-api"
-      MemorySize: 256
+      MemorySize: 512
       CodeUri: .
       Handler: src.api.main.handler
       Runtime: python3.9
