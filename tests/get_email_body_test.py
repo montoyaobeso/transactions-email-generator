@@ -2,7 +2,7 @@ import pandas as pd
 
 from unittest import TestCase
 
-from src.app.email.content_builder import get_email_body
+from src.app.email.content_builder import EmailBodyBuilder
 
 
 class TestEmailBodyBuilder(TestCase):
@@ -18,7 +18,8 @@ class TestEmailBodyBuilder(TestCase):
         }
 
         # Act
-        html_body = get_email_body(**fields)
+        body_builder = EmailBodyBuilder(**fields)
+        html_body = body_builder.get_email_body()
 
         # Assert
         self.assertIn("John Doe.", html_body)
