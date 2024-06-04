@@ -22,7 +22,7 @@ def get_email_body(
         "avg_credit_amount": f"${avg_credit_amount:,.2f}",
         "transactions_per_month": "".join(
             [
-                f'<li style="Margin:0">{month}: {count}</li>'
+                f'<li style="Margin:0">{month}: {count:,.0f}</li>'
                 for month, count in transactions_per_month
             ]
         ),
