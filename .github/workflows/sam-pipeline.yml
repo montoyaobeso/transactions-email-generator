@@ -55,7 +55,6 @@ jobs:
         POSTGRES_PORT: 5432
         POSTGRES_USER: postgres
         POSTGRES_DB: postgres
-        POSTGRES_USER: postgres
     - name: Run coverage report
       run: python -m coverage report -m 
 
