@@ -40,8 +40,6 @@ models.Base.metadata.create_all(bind=engine)
 # handler = Mangum(app)
 
 
-from fastapi import FastAPI
-
 app = FastAPI()
 
 
