@@ -11,8 +11,6 @@ logger.setLevel(logging.INFO)
 
 if os.environ["STAGE"] != "local":
     db_credentials = get_secret("stori-database-credentials")
-    logger.info("Credentials response type:", type(db_credentials))
-    logger.info("Credentials keys: ", db_credentials.keys())
     os.environ["POSTGRES_USER"] = db_credentials["username"]
     os.environ["POSTGRES_PASSWORD"] = db_credentials["password"]
     os.environ["POSTRES_HOST"] = db_credentials["host"]
