@@ -22,7 +22,7 @@ Parameters:
 
 Globals:
   Function:
-    Timeout: 500
+    Timeout: 900
 
 Resources:
   Function:
