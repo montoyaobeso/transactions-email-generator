@@ -13,11 +13,6 @@ load_dotenv()
 # from src.api.routers import transaction
 # from src.api.routers import send_balance
 
-from src.app.db import models
-from src.app.db.database import engine
-
-
-models.Base.metadata.create_all(bind=engine)
 
 # app = FastAPI(
 #     title="Transactions Email Generator",
@@ -45,6 +40,10 @@ app = FastAPI()
 
 @app.get("/")
 async def root():
+    from src.app.db import models
+    from src.app.db.database import engine
+
+    models.Base.metadata.create_all(bind=engine)
     return {"message": "Hello World"}
 
 
