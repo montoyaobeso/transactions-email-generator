@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from src.api.routers import root
+# from src.api.routers import root
 
 # from src.api.routers import presiged_url
 # from src.api.routers import load_transactions
@@ -13,11 +13,11 @@ from src.api.routers import root
 # from src.api.routers import transaction
 # from src.api.routers import send_balance
 
-from src.app.db import models
-from src.app.db.database import engine
+# from src.app.db import models
+# from src.app.db.database import engine
 
 
-models.Base.metadata.create_all(bind=engine)
+# models.Base.metadata.create_all(bind=engine)
 
 # app = FastAPI(
 #     title="Transactions Email Generator",
