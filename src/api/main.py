@@ -1,14 +1,23 @@
 from fastapi import FastAPI
 from mangum import Mangum
-
-from src.api.routers import root
-from src.api.routers import presiged_url
-from src.api.routers import balance_by_file
-from src.api.routers import balance_by_file_id
-
 from dotenv import load_dotenv
 
 load_dotenv()
+
+from src.api.routers import root
+
+from src.api.routers import presiged_url
+from src.api.routers import load_transactions
+from src.api.routers import load_transactions_s3
+from src.api.routers import account
+from src.api.routers import transaction
+from src.api.routers import send_balance
+
+from src.app.db import models
+from src.app.db.database import engine
+
+
+models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title="Transactions Email Generator",
@@ -21,8 +30,11 @@ app = FastAPI(
 )
 
 app.include_router(root.router)
+app.include_router(account.router)
+app.include_router(transaction.router)
 app.include_router(presiged_url.router)
-app.include_router(balance_by_file.router)
-app.include_router(balance_by_file_id.router)
+app.include_router(load_transactions.router)
+app.include_router(load_transactions_s3.router)
+app.include_router(send_balance.router)
 
 handler = Mangum(app)
