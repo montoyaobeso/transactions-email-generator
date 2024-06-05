@@ -7,6 +7,8 @@ from src.app.aws.secrets import get_secret
 
 def set_credentials():
     db_credentials = get_secret("stori-database-credentials")
+    print(type(db_credentials))
+    print(db_credentials.keys())
     os.environ["POSTGRES_USER"] = db_credentials["username"]
     os.environ["POSTGRES_PASSWORD"] = db_credentials["password"]
     os.environ["POSTRES_HOST"] = db_credentials["host"]
