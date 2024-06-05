@@ -9,8 +9,7 @@ from src.app.aws.secrets import get_secret
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-
-def set_credentials():
+if os.environ["STAGE"] != "local":
     db_credentials = get_secret("stori-database-credentials")
     logger.info(type(db_credentials))
     logger.info(db_credentials.keys())
@@ -19,21 +18,10 @@ def set_credentials():
     os.environ["POSTRES_HOST"] = db_credentials["host"]
     os.environ["POSTRES_DB"] = db_credentials["database"]
 
-
-if os.environ["STAGE"] != "local":
-    set_credentials()
-
-
 SQLALCHEMY_DATABASE_URL = f"postgresql://{os.environ['POSTGRES_USER']}:{os.environ['POSTGRES_PASSWORD']}@{os.environ['POSTRES_HOST']}/{os.environ['POSTGRES_DB']}"
-try:
-    engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
-    SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
-    Base = declarative_base()
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-except Exception as exc:
-    logger.error("ERROR: Connection to RDS for PostgreSQL instance failed", exc)
-    raise exc
-
-logger.info("SUCCESS: Connection to RDS for PostgreSQL instance succeeded")
+Base = declarative_base()
