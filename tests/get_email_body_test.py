@@ -14,7 +14,7 @@ class TestEmailBodyBuilder(TestCase):
             "total_balance": 100,
             "avg_debit_amount": -100,
             "avg_credit_amount": 100,
-            "transactions_per_month": [("July", 2), ("August", 2)],
+            "transactions_history": {"2024": [("July", 2), ("August", 2)]},
         }
 
         # Act
