@@ -51,12 +51,12 @@ Resources:
             BucketName: !Ref BucketName
       VpcConfig:
         SecurityGroupIds:
-          - sg-0a38ddf1ec1cf8ba6
+          - sg-0caac4ee042ea071e
         SubnetIds:
-          - subnet-073eb3490728cadab
-          - subnet-074f00c540bfc2f19
-          - subnet-05975dbcc28bc6ffb
-          - subnet-0d4ee08a8b2e795c9
+          - subnet-0eba33baff274049b
+          - subnet-00326eed251a41661
+          - subnet-0d6d5af9444661658
+          - subnet-0d1cd1f453b97c1dd
 
   Api:
     Name: !Sub "${Project}-${Stage}-http-api"
