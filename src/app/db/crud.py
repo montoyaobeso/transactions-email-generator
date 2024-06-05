@@ -8,6 +8,7 @@ from typing import List
 
 
 from pydantic import parse_obj_as
+from src.app.db.database import engine
 
 
 def get_account(db: Session, account_id: int):
@@ -114,3 +115,29 @@ def create_transaction(
     db.commit()
     db.refresh(db_item)
     return db_item
+
+
+from src.app.db.models import Transaction as TransactionTable
+from sqlalchemy.dialects.postgresql import insert
+
+
+def save_transactions_bulk(
+    db: Session, transactions: List[schemas.TransactionCreate], account_id: int
+):
+    data = [
+        {
+            "transaction_id": t.transaction_id,
+            "date": t.date,
+            "value": t.value,
+            "account_id": account_id,
+        }
+        for t in transactions
+    ]
+
+    insert_table = insert(TransactionTable).values(data)
+    insert_table_sql = insert_table.on_conflict_do_nothing(
+        index_elements=["transaction_id", "account_id"]
+    )
+
+    db.execute(insert_table_sql)
+    db.commit()

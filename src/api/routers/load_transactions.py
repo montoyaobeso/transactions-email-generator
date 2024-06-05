@@ -73,28 +73,15 @@ async def load_transactions(
         for t in (txns.to_dict("records"))
     ]
 
-    # Save transactions
-    ignored_records = 0
-    saved_records = 0
-    for txn in transactions:
-        db_transaction = crud.get_transaction_by_ids(
-            db,
-            account_id=account_id,
-            transaction_id=txn.transaction_id,
-        )
-        if db_transaction:
-            ignored_records += 1
-            continue
-
-        crud.create_transaction(db, transaction=txn, account_id=db_account.id)
-        saved_records += 1
+    crud.save_transactions_bulk(
+        db,
+        transactions=transactions,
+        account_id=db_account.id,
+    )
 
     return JSONResponse(
         status_code=status.HTTP_200_OK,
         content={
             "message": "File processed successfuly.",
-            "saved": saved_records,
-            "ignored": ignored_records,
-            "total": saved_records + ignored_records,
         },
     )
