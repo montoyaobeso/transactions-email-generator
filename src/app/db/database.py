@@ -16,7 +16,7 @@ def set_credentials():
 
 
 if os.environ["STAGE"] != "local":
-    set_credentials
+    set_credentials()
 
 SQLALCHEMY_DATABASE_URL = f"postgresql://{os.environ['POSTGRES_USER']}:{os.environ['POSTGRES_PASSWORD']}@{os.environ['POSTRES_HOST']}/{os.environ['POSTGRES_DB']}"
 
