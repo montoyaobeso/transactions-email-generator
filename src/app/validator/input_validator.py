@@ -9,7 +9,7 @@ schema = DataFrameSchema(
             nullable=False,
         ),
         "Date": Column(
-            pandas_engine.DateTime(to_datetime_kwargs={"format": "%m/%d"}),
+            pandas_engine.DateTime(to_datetime_kwargs={"format": "%m/%d/%Y"}),
             nullable=False,
         ),
         "Transaction": Column(
