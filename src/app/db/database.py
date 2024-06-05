@@ -20,7 +20,7 @@ if os.environ["STAGE"] != "local":
 else:
     logger.info("Executing in local enviroment.")
 
-SQLALCHEMY_DATABASE_URL = f"postgresql://{os.environ['POSTGRES_USER']}:{os.environ['POSTGRES_PASSWORD']}@{os.environ['POSTRES_HOST']}/{os.environ['POSTGRES_DB']}"
+SQLALCHEMY_DATABASE_URL = f"postgresql+psycopg2://{os.environ['POSTGRES_USER']}:{os.environ['POSTGRES_PASSWORD']}@{os.environ['POSTRES_HOST']}/{os.environ['POSTGRES_DB']}"
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
