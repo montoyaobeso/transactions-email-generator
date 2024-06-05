@@ -33,6 +33,7 @@ try:
     Base = declarative_base()
 
 except Exception as exc:
+    logger.error("ERROR: Connection to RDS for PostgreSQL instance failed", exc)
     raise exc
 
 logger.info("SUCCESS: Connection to RDS for PostgreSQL instance succeeded")
