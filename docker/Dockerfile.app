@@ -13,3 +13,4 @@ COPY ./src /code/src
 ENV POSTGRES_HOST=host.docker.internal
 
 ENTRYPOINT ["python", "-m", "src.app.cli"]
+

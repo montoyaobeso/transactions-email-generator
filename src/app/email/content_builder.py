@@ -42,12 +42,14 @@ class EmailBodyBuilder:
 
             transactions_summary.append("</ul>")
 
+
         fields = {
             "client_name": self.client_name.title(),
             "total_balance": f"${self.total_balance:,.2f}",
             "avg_debit_amount": f"${self.avg_debit_amount:,.2f}",
             "avg_credit_amount": f"${self.avg_credit_amount:,.2f}",
             "transactions_history": "".join(transactions_summary),
+
         }
 
         return template.render(fields)

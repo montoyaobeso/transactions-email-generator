@@ -23,14 +23,12 @@ The application requires detailed CSV files containing the following columns:
 - `Date`: The transaction date in MM/DD/YYYY format.
 - `Transaction`: The amount of the transaction, marked with + for credits and - for debits.
 
-
 ### Command Line Interface (CLI)
 
 A simple CLI is available, offering:
  - **Account managment**: create accounts.
  - **Load account transactions**: load transactions to database though CSV provided files.
  - **Send balance**: notify users by sending custom emails with detailed data.
-
 
 ### API Deployment
 
@@ -40,7 +38,6 @@ AWS Integration: Works seamlessly with other AWS services, such as:
 - **AWS S3**: For storing and retrieving CSV files.
 - **AWS SecretsManager**: For secure credentials storage.
 - **AWS RDS (PostgreSQL)**: For robust database management.
-
 
 # Local Environment Setup
 
@@ -115,9 +112,9 @@ positional arguments:
 
 optional arguments:
   -h, --help            show this help message and exit
-
 ```
 
+# API Description
 
 With the image `transactions-email-generator-app` built and running the following flows can be executed:
 ### Create Account
@@ -135,6 +132,7 @@ docker run -v ./csv:/csv transactions-email-generator-app:latest load_transactio
 docker run -v ./csv:/csv transactions-email-generator-app:latest send_balance --account-id 1
 ```
 
+## Endpoints
 
 # API Description
 

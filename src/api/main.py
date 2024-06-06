@@ -7,6 +7,7 @@ load_dotenv()
 from src.app.db import models
 from src.app.db.database import engine
 
+
 models.Base.metadata.create_all(bind=engine)
 
 from src.api.routers import (
@@ -36,5 +37,6 @@ app.include_router(presiged_url.router)
 app.include_router(load_transactions.router)
 app.include_router(load_transactions_s3.router)
 app.include_router(send_balance.router)
+
 
 handler = Mangum(app)
