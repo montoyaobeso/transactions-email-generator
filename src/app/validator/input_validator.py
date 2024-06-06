@@ -1,6 +1,7 @@
 from pandera import Column, DataFrameSchema, Check, Index
 from pandera.engines import pandas_engine
 
+# Schema to validate CSV input file, ensure data format and non-null values.
 schema = DataFrameSchema(
     {
         "Id": Column(

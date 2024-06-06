@@ -35,7 +35,7 @@ def with_session(func):
 
 @with_session
 def create_account_flow(args, session):
-    print("Executing create_account flow...")
+    """Create a new account."""
 
     account = schemas.AccountCreate(name=args.name, email=args.email)
 
@@ -52,6 +52,7 @@ def create_account_flow(args, session):
 
 @with_session
 def load_transactions_flow(args, session):
+    """Load transactions to database."""
 
     db_account = crud.get_account(session, account_id=args.account_id)
 
@@ -89,6 +90,7 @@ def load_transactions_flow(args, session):
 
 @with_session
 def send_balance_flow(args, session):
+    """Send balance to account's registered email."""
     # Get account info
     db_account = crud.get_account(session, account_id=args.account_id)
 

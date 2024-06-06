@@ -30,6 +30,7 @@ async def create_account(
     account: schemas.AccountCreate,
     db: Session = Depends(get_db),
 ):
+    """Create a new account."""
     # Get account by email
     db_account = crud.get_account_by_email(db, email=account.email)
 
@@ -41,6 +42,7 @@ async def create_account(
 
 @router.get("/accounts", response_model=List[schemas.Accounts])
 async def get_accounts(db: Session = Depends(get_db)):
+    """Get all accounts."""
 
     # Get account by email
     db_account = crud.get_accounts(db)

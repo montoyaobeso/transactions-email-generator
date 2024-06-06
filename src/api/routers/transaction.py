@@ -28,6 +28,7 @@ async def create_transaction(
     account_id: int,
     db: Session = Depends(get_db),
 ):
+    """Register a single transaction."""
     db_transaction = crud.get_transaction_by_ids(
         db, account_id=account_id, transaction_id=transaction.transaction_id
     )
@@ -45,6 +46,7 @@ async def get_transactions(
     account_id: int,
     db: Session = Depends(get_db),
 ):
+    """Get all transactions."""
     db_transaction = crud.get_transactions_by_account_id(db, account_id=account_id)
 
     if db_transaction is None:

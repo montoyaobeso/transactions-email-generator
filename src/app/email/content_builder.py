@@ -2,6 +2,7 @@ from jinja2 import Environment, FileSystemLoader
 
 
 class EmailBodyBuilder:
+    """Class to build a custom HTMP email body."""
 
     def __init__(
         self,
@@ -19,6 +20,7 @@ class EmailBodyBuilder:
         self.transactions_history = transactions_history
 
     def get_email_body(self) -> str:
+        """Render HTML email body."""
 
         file_loader = FileSystemLoader("src/app/templates")
 

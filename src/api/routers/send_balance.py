@@ -29,7 +29,7 @@ def get_db():
 
 
 @router.post("")
-async def load_transactions(
+async def send_balance(
     account_id: Annotated[
         str,
         Form(
@@ -48,6 +48,7 @@ async def load_transactions(
     ] = None,
     db: Session = Depends(get_db),
 ):
+    """Send balance to account's email."""
 
     # Get account info
     db_account = crud.get_account(db, account_id=account_id)

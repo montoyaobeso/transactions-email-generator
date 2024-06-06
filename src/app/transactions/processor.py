@@ -32,11 +32,11 @@ class TransactionsProcessor:
         """
         return self.txns[self.txns["value"] >= 0]["value"].mean()
 
-    def get_transactions_history(self) -> list:
+    def get_transactions_history(self) -> dict:
         """Return a sorted list of transactions per month and year
 
         Returns:
-            list: sorted list of tuples with transactions per month.
+            dict: dictionary otuples with transactions per month.
         """
         df = self.txns.copy()
 

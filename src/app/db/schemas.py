@@ -3,6 +3,7 @@ from datetime import date
 from pydantic import BaseModel, EmailStr, Field
 
 
+# Transaction schemas
 class TransactionBase(BaseModel):
     transaction_id: int
     date: date
@@ -25,6 +26,7 @@ class Transactions(TransactionBase):
     id: int
 
 
+# Account schemas
 class AccountBase(BaseModel):
     name: str
     email: EmailStr

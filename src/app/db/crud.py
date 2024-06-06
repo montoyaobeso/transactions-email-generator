@@ -12,18 +12,22 @@ from . import models, schemas
 
 
 def get_account(db: Session, account_id: int):
+    """Get account by id."""
     return db.query(models.Account).filter(models.Account.id == account_id).first()
 
 
 def get_account_by_email(db: Session, email: str):
+    """Get account by eamil."""
     return db.query(models.Account).filter(models.Account.email == email).first()
 
 
 def get_accounts(db: Session, skip: int = 0, limit: int = 100):
+    """Get all accounts."""
     return db.query(models.Account).offset(skip).limit(limit).all()
 
 
 def create_account(db: Session, account: schemas.AccountCreate):
+    """Create a new account."""
     db_item = models.Account(email=account.email, name=account.name)
     db.add(db_item)
     db.commit()
@@ -31,8 +35,10 @@ def create_account(db: Session, account: schemas.AccountCreate):
     return parse_obj_as(schemas.Account, db_item)
 
 
-def get_transactions(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(models.Transaction).offset(skip).limit(limit).all()
+def get_transactions(db: Session):
+    """Get all transactions"""
+    # TODO: Support pagination with offset() and limit()
+    return db.query(models.Transaction).all()
 
 
 def get_transactions_by_date(
@@ -41,6 +47,8 @@ def get_transactions_by_date(
     from_date: date = None,
     to_date: date = None,
 ) -> List[schemas.Transaction]:
+    """Get all transactions filter by dates."""
+
     if from_date is None and to_date is None:
         return parse_obj_as(
             List[schemas.Transaction],
@@ -86,9 +94,9 @@ def get_transactions_by_date(
         )
 
 
-def get_transaction_by_ids(
-    db: Session, account_id: int, transaction_id: int, skip: int = 0, limit: int = 100
-):
+def get_transaction_by_ids(db: Session, account_id: int, transaction_id: int):
+    """Get a transaction by account id and transaction id"""
+    # TODO: Support pagination with offset() and limit()
     return (
         db.query(models.Transaction)
         .filter(models.Transaction.transaction_id == transaction_id)
@@ -97,9 +105,9 @@ def get_transaction_by_ids(
     )
 
 
-def get_transactions_by_account_id(
-    db: Session, account_id: int, skip: int = 0, limit: int = 100
-):
+def get_transactions_by_account_id(db: Session, account_id: int):
+    """Get all transactions by account id."""
+    # TODO: Support pagination with offset() and limit()
     return (
         db.query(models.Transaction)
         .filter(models.Transaction.account_id == account_id)
@@ -110,6 +118,7 @@ def get_transactions_by_account_id(
 def create_transaction(
     db: Session, transaction: schemas.TransactionCreate, account_id: int
 ):
+    """Create transaction by account id."""
     db_item = models.Transaction(**transaction.model_dump(), account_id=account_id)
     db.add(db_item)
     db.commit()
@@ -120,6 +129,7 @@ def create_transaction(
 def save_transactions_bulk(
     db: Session, transactions: List[schemas.TransactionCreate], account_id: int
 ):
+    """Save bulk transactions by account id. Existing transactions by unique(transaction_id and account_id) are ignored."""
     data = [
         {
             "transaction_id": t.transaction_id,

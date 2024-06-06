@@ -45,9 +45,7 @@ async def load_transactions_s3(
     ],
     db: Session = Depends(get_db),
 ):
-    """
-    Load transactions from a file uploaded to s3.
-    """
+    """Load transactions from a file uploaded to s3."""
 
     # Create s3 client and get object
     s3 = boto3.client("s3")

@@ -1,12 +1,12 @@
+import json
+
 import boto3
 from botocore.exceptions import ClientError
-import json
-import logging
 
 
 def get_secret(secret_name: str, region: str = "us-west-2"):
+    """Get a secret value from AWS SecretsManager service."""
 
-    # Create a Secrets Manager client
     session = boto3.session.Session()
     client = session.client(service_name="secretsmanager", region_name=region)
 
@@ -16,7 +16,5 @@ def get_secret(secret_name: str, region: str = "us-west-2"):
         raise e
 
     secret = get_secret_value_response["SecretString"]
-
-    logging.info("Secret retrieved successfully.")
 
     return json.loads(secret)

@@ -38,7 +38,7 @@ async def load_transactions(
     file: UploadFile = File(..., description="Binary CSV file data."),
     db: Session = Depends(get_db),
 ):
-
+    """Load and save transactions from provided file."""
     db_account = crud.get_account(db, account_id=account_id)
 
     if file.content_type == "text/csv":
