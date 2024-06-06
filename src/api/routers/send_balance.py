@@ -39,12 +39,14 @@ async def send_balance(
     from_date: Annotated[
         date,
         Form(
-            description="Date to recover records from (lower limit, inclusive) Format `YYYY-MM-DD`."
+            description="Date to recover records from (lower limit, inclusive). Format `YYYY-MM-DD`."
         ),
     ] = None,
     to_date: Annotated[
         date,
-        Form(description="Date to recover records to (upper lmit, inclusive)."),
+        Form(
+            description="Date to recover records to (upper lmit, inclusive. Format `YYYY-MM-DD`."
+        ),
     ] = None,
     db: Session = Depends(get_db),
 ):
