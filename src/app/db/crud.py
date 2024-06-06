@@ -1,14 +1,14 @@
-from sqlalchemy.orm import Session
-
-from . import models, schemas
-
 from datetime import date
-
 from typing import List
 
-
 from pydantic import parse_obj_as
+from sqlalchemy.dialects.postgresql import insert
+from sqlalchemy.orm import Session
+
 from src.app.db.database import engine
+from src.app.db.models import Transaction as TransactionTable
+
+from . import models, schemas
 
 
 def get_account(db: Session, account_id: int):
@@ -28,7 +28,7 @@ def create_account(db: Session, account: schemas.AccountCreate):
     db.add(db_item)
     db.commit()
     db.refresh(db_item)
-    return db_item
+    return parse_obj_as(schemas.Account, db_item)
 
 
 def get_transactions(db: Session, skip: int = 0, limit: int = 100):
@@ -115,10 +115,6 @@ def create_transaction(
     db.commit()
     db.refresh(db_item)
     return db_item
-
-
-from src.app.db.models import Transaction as TransactionTable
-from sqlalchemy.dialects.postgresql import insert
 
 
 def save_transactions_bulk(
