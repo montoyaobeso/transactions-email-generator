@@ -10,6 +10,7 @@ router = APIRouter(
 
 @router.get("/")
 async def root():
+    """Get a welcome messge from the API."""
     return JSONResponse(
         content={"message": "Welcome to transactions email generator API."},
         status_code=status.HTTP_200_OK,

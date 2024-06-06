@@ -1,9 +1,5 @@
 class IncorrectInputFileFormatException(Exception):
-    """Exception raised for an invalid input file format.
-
-    Attributes:
-        message -- explanation of the error
-    """
+    """Exception raised for an invalid input file format."""
 
     def __init__(self, file_name: str):
         self.message = f"The input file format is not accepted, only CSV files are accecpted, input file: {file_name}"
@@ -11,11 +7,7 @@ class IncorrectInputFileFormatException(Exception):
 
 
 class SchemaValidationErrorException(Exception):
-    """Exception raised for invalid data in input file.
-
-    Attributes:
-        message -- explanation of the error
-    """
+    """Exception raised for invalid data in input file."""
 
     def __init__(self, exception: str):
 
@@ -24,4 +16,20 @@ class SchemaValidationErrorException(Exception):
             {exception.failure_cases} \n\
             \nDataFrame object that failed validation: \n\
             {exception.data}"
+        super().__init__(self.message)
+
+
+class AccountAlreadyExistsInDBException(Exception):
+    """Exception raised when trying to create an existing account."""
+
+    def __init__(self: str):
+        self.message = "The account already existes in the database."
+        super().__init__(self.message)
+
+
+class TransactionsNotFound(Exception):
+    """Exception raised when trying to send a balance for an account without transactions."""
+
+    def __init__(self: str):
+        self.message = "The account has no transactions."
         super().__init__(self.message)

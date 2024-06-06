@@ -16,6 +16,7 @@ router = APIRouter(
 
 @router.get("")
 async def presigned_url():
+    """Get a prsigned url and additional fields to upload a file to s3."""
 
     response = create_presigned_post(
         bucket_name=os.environ["BUCKET_NAME"],

@@ -4,6 +4,8 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile.api
+    depends_on:
+      - db
     ports:
       - "80:80"
     command:
@@ -18,15 +20,34 @@ services:
       ]
     networks:
       - app-net
-
   app:
     build:
       context: .
       dockerfile: docker/Dockerfile.app
+    environment:
+      POSTGRES_HOST: 'host.docker.internal'
     networks:
       - app-net
     volumes:
       - ./csv:/csv
+  db:
+    container_name: db
+    image: postgres:14-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    networks:
+      - app-net
 
 networks:
   app-net:
+    driver: bridge
+
+
+volumes:
+  pgdata:
