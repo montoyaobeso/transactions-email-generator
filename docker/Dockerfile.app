@@ -10,4 +10,6 @@ RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 COPY ./src /code/src
 
-ENTRYPOINT ["python", "-m", "src.app.main"]
+ENV POSTGRES_HOST=host.docker.internal
+
+ENTRYPOINT ["python", "-m", "src.app.cli"]
