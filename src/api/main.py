@@ -8,7 +8,7 @@ from src.app.db import models
 from src.app.db.database import engine
 
 
-models.Base.metadata.create_all(bind=engine)
+# models.Base.metadata.create_all(bind=engine)
 
 from src.api.routers import (
     account,
