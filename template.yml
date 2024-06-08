@@ -32,7 +32,7 @@ Resources:
       MemorySize: 1024
       CodeUri: .
       Handler: src.api.main.handler
-      Runtime: python3.9
+      Runtime: python3.12
       Environment:
         Variables:
           BUCKET_NAME: !Ref BucketName

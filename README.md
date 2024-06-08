@@ -42,7 +42,7 @@ AWS Integration: Works seamlessly with other AWS services, such as:
 # Local Environment Setup
 
 ## Requirements
-- [Python 3.9](https://www.python.org/downloads/)
+- [Python 3.12](https://www.python.org/downloads/)
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 - [Docker Compose](https://pypi.org/project/docker-compose/)
 
