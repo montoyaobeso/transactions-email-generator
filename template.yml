@@ -29,7 +29,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: !Sub "${Project}-${Stage}-api"
-      MemorySize: 512
+      MemorySize: 1024
       CodeUri: .
       Handler: src.api.main.handler
       Runtime: python3.9

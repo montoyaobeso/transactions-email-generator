@@ -12,7 +12,7 @@ Users can send comprehensive account balance emails, including:
 - **Total Account Balance**: The overall balance of the account.
 - **Average Debit Amount**: The average amount of all debit transactions.
 - **Average Credit Amount**: The average amount of all credit transactions.
-- **Monthly Transaction Count**: The number of transactions processed each month.
+- **Transactions History**: The number of transactions processed each month (and year).
 
 
 ### CSV Input File
@@ -26,9 +26,9 @@ The application requires detailed CSV files containing the following columns:
 ### Command Line Interface (CLI)
 
 A simple CLI is available, offering:
- - **Account managment**: create accounts.
- - **Load account transactions**: load transactions to database though CSV provided files.
- - **Send balance**: notify users by sending custom emails with detailed data.
+ - **Account managment**: Create accounts.
+ - **Load account transactions**: Load transactions to database through CSV provided files.
+ - **Send balance**: nNotify users by sending custom emails with detailed data.
 
 ### API Deployment
 
@@ -37,7 +37,7 @@ The API is deployed on AWS, providing:
 AWS Integration: Works seamlessly with other AWS services, such as:
 - **AWS S3**: For storing and retrieving CSV files.
 - **AWS SecretsManager**: For secure credentials storage.
-- **AWS RDS (PostgreSQL)**: For robust database management.
+- **AWS RDS (PostgreSQL)**: For database management.
 
 # Local Environment Setup
 
@@ -72,7 +72,7 @@ Configure the email sender service credentials:
 cp .env.example .env
 ```
 
-Set `SENDGRID_SENDER_EMAIL` and `SENDGRID_API_KEY` to enable sending emails trough SendGrid service.
+Set `SENDGRID_SENDER_EMAIL` and `SENDGRID_API_KEY` in `.env` file to enable sending emails trough SendGrid service.
 
 
 
@@ -95,7 +95,7 @@ The CLI allows three diffent flows:
 
 CLI Help:
 ```bash
-$ docker run -v ./csv:/csv transactions-email-generator-app:latest -h
+$ docker run -v transactions-email-generator-app:latest -h
 usage: cli.py [-h] {create_account,load_transactions,send_balance} ...
 
 A command line tool with multiple flows.
@@ -106,9 +106,9 @@ positional arguments:
     create_account      Execute create_account flow. Requires parameters
                         --name (str) and --email (str)
     load_transactions   Execute load_transactions flow. Requires parameters
-                        --account_id and --path-to_file
+                        --account-id and --path-to_file
     send_balance        Execute send_email flow. Requires parameters
-                        --account_id, --from_date and --to_date
+                        --account-id, --from_date and --to_date
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -119,17 +119,18 @@ optional arguments:
 With the image `transactions-email-generator-app` built and running the following flows can be executed:
 ### Create Account
 ```bash
-docker run -v ./csv:/csv transactions-email-generator-app:latest create_account --name "Stori Card" --email storinoreply@gmail.com
+docker run transactions-email-generator-app:latest create_account --name "Stori Card" --email storinoreply@gmail.com
 ```
 
 ### Load Transactions
 ```bash
 docker run -v ./csv:/csv transactions-email-generator-app:latest load_transactions --account-id 1 --path-to-file /csv/transactions_10k.csv
 ```
+Note that for this command a virtual volume mapping is provided to mount `csv` local directory into `/csv` directory in the container.
 
 ### Send Balance
 ```bash
-docker run -v ./csv:/csv transactions-email-generator-app:latest send_balance --account-id 1
+docker run -v transactions-email-generator-app:latest send_balance --account-id 1
 ```
 
 ## Endpoints
@@ -149,8 +150,14 @@ The available endpoints are as follows:
 | `/send_balance` | POST    | Post a request to gather account transactions and send a balance summary to account's email. | `account_id` | A message informing the email was send sucessfully, or an error message instead. |
 
 
-Script to post a file to presigned url:
+Post a file to presigned url:
 
+Install dependency:
+```bash
+python -m pip install requests
+```
+
+Reference script:
 ```python
 import requests
 
