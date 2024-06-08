@@ -52,7 +52,7 @@ Create a virtual environment:
 
 
 ```bash
-python3.9 -m venv venv
+python3.12 -m venv venv
 ```
 
 Activate the environemnt:
