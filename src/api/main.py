@@ -6,13 +6,36 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
+import logging
+
+logger = logging.getLogger()
 from src.api.routers import account
+
+logger.info("account route imported")
+
 from src.api.routers import load_transactions
+
+logger.info("load_transactions route imported")
+
 from src.api.routers import load_transactions_s3
+
+logger.info("load_transactions_s3 route imported")
+
 from src.api.routers import presiged_url
+
+logger.info("presiged_url route imported")
+
 from src.api.routers import root
+
+logger.info("root route imported")
+
 from src.api.routers import send_balance
+
+logger.info("send_balance route imported")
+
 from src.api.routers import transaction
+
+logger.info("transaction route imported")
 
 
 app = FastAPI(
