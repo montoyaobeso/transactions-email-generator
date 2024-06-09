@@ -88,7 +88,7 @@ Resources:
       ServiceName: python-app
       SourceConfiguration:
         AuthenticationConfiguration:
-          ConnectionArn: !Ref AppRunnerConnectionName
+          ConnectionArn: !Ref AppRunnerConnectionArn
         AutoDeploymentsEnabled: true
         CodeRepository:
           RepositoryUrl: "https://github.com/montoyaobeso/transactions-email-generator"
