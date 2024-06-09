@@ -8,4 +8,4 @@ run:
   runtime-version: 3.11
   command: uvicorn src.api.main:app
   network:
-    port: 80
+    port: 8080
