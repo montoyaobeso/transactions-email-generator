@@ -87,7 +87,7 @@ jobs:
           fi
       # sam build
       - name: Run SAM Build
-        run: sam build --use-container
+        run: sam build
       # sam deploy
       - name: Run SAM Deploy
         run: | 
