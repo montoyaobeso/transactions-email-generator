@@ -10,6 +10,7 @@ on:
       - 'template.yml'
       - 'samconfig.toml'
       - 'requirements.txt'
+      - 'docker/**'
 
 jobs:
   test:
