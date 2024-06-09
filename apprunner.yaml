@@ -6,6 +6,6 @@ build:
       - pip install -r requirements.txt
 run: 
   runtime-version: 3.11
-  command: uvicorn src.api.main:app
+  command: uvicorn src.api.main:app --port 8080
   network:
     port: 8080
