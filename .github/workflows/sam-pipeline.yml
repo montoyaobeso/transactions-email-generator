@@ -97,4 +97,5 @@ jobs:
             BucketName=${{ secrets.AWS_BUCKET_NAME_FILES_PREFIX }}-${{ env.ENV_STAGE }} \
             SecretName=${{ secrets.AWS_SECRET_NAME }} \
             Stage=${{ env.ENV_STAGE }} \
+            AppRunnerConnectionArn=${{ secrets.AWS_APP_RUNNER_CONNECTION_ARN }}
           --no-confirm-changeset --no-fail-on-empty-changeset

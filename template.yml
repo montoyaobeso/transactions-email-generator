@@ -19,6 +19,9 @@ Parameters:
   SecretName:
     Description: "Enail sender servide secret name."
     Type: "String"
+  AppRunnerConnectionArn:
+    Description: "App runner connection Arn."
+    Type: "String"
 
 Globals:
   Function:
@@ -63,6 +66,58 @@ Resources:
     Name: !Sub "${Project}-${Stage}-http-api"
     Type: AWS::Serverless::HttpApi
     SrageName: !Ref Stage
+
+
+  AppRunnerVPCConnector:
+    Type: AWS::AppRunner::VpcConnector
+    Properties:
+      SecurityGroups: 
+        - sg-0caac4ee042ea071e
+        - sg-06773d9f2a2418747
+      Subnets: 
+        - subnet-0eba33baff274049b
+        - subnet-00326eed251a41661
+        - subnet-0d6d5af9444661658
+        - subnet-0d1cd1f453b97c1dd
+      VpcConnectorName: !Sub "${Project}-${Stage}-vpc-connector"
+
+
+  AppRunnerService:
+    Type: AWS::AppRunner::Service
+    Properties:
+      ServiceName: python-app
+      SourceConfiguration:
+        AuthenticationConfiguration:
+          ConnectionArn: !Ref AppRunnerConnectionName
+        AutoDeploymentsEnabled: true
+        CodeRepository:
+          RepositoryUrl: "https://github.com/montoyaobeso/transactions-email-generator"
+          SourceCodeVersion:
+            Type: BRANCH
+            Value: !Ref Stage
+          CodeConfiguration:
+            ConfigurationSource: API
+            CodeConfigurationValues:
+              Runtime: PYTHON_3
+              BuildCommand: "pip install -r requirements.txt"
+              StartCommand: "uvicorn src.api.main:app"
+              Port: 8080
+              RuntimeEnvironmentVariables:
+                -
+                  Name: BUCKET_NAME
+                  Value: !Ref BucketName
+                -
+                  Name: SECRET_NAME
+                  Value: !Ref SecretName
+                -
+                  Name: STAGE
+                  Value: !Ref Stage
+      InstanceConfiguration:
+        Cpu: 1 vCPU
+        Memory: 3 GB
+
+
+
 
 Outputs:
   ApiUrl:
