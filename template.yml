@@ -99,9 +99,6 @@ Resources:
             ConfigurationSource: API
             CodeConfigurationValues:
               Runtime: PYTHON_3
-              BuildCommand: "pip install -r requirements.txt"
-              StartCommand: "uvicorn src.api.main:app"
-              Port: 8080
               RuntimeEnvironmentVariables:
                 -
                   Name: BUCKET_NAME
