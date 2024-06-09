@@ -5,21 +5,13 @@ from sqlalchemy.orm import Session
 
 from src.app.db import crud, schemas
 from src.app.db.database import SessionLocal
+from src.app.db.dependencies import get_db
 
 router = APIRouter(
     prefix="",
     tags=["transaction"],
     responses={404: {"description": "Not found"}},
 )
-
-
-# Dependency
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 
 @router.post("/transaction", response_model=schemas.Transaction)

@@ -6,8 +6,8 @@ from fastapi import APIRouter, Depends, Form, HTTPException, status
 from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 
-from src.app.db import crud, schemas
-from src.app.db.database import SessionLocal
+from src.app.db import crud
+from src.app.db.dependencies import get_db
 from src.app.email.content_builder import EmailBodyBuilder
 from src.app.email.sender import EmailSender
 from src.app.transactions.processor import TransactionsProcessor
@@ -17,15 +17,6 @@ router = APIRouter(
     tags=["send_balance"],
     responses={404: {"description": "Not found"}},
 )
-
-
-# Dependency
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 
 @router.post("")

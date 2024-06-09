@@ -1,19 +1,19 @@
-from dotenv import load_dotenv
 from fastapi import FastAPI
 from mangum import Mangum
+
+from dotenv import load_dotenv
 
 load_dotenv()
 
 
-from src.api.routers import (
-    account,
-    load_transactions,
-    load_transactions_s3,
-    presiged_url,
-    root,
-    send_balance,
-    transaction,
-)
+from src.api.routers import account
+from src.api.routers import load_transactions
+from src.api.routers import load_transactions_s3
+from src.api.routers import presiged_url
+from src.api.routers import root
+from src.api.routers import send_balance
+from src.api.routers import transaction
+
 
 app = FastAPI(
     title="Transactions Email Generator",
