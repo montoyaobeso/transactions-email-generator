@@ -85,7 +85,7 @@ Resources:
   AppRunnerService:
     Type: AWS::AppRunner::Service
     Properties:
-      ServiceName: !Sub "${Project}-${Stage}-app-runner"
+      ServiceName: !Sub "stori-api-app-runner"
       SourceConfiguration:
         AuthenticationConfiguration:
           ConnectionArn: !Ref AppRunnerConnectionArn
