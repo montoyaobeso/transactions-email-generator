@@ -5,7 +5,6 @@ from pydantic import parse_obj_as
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.orm import Session
 
-from src.app.db.database import engine
 from src.app.db.models import Transaction as TransactionTable
 
 from . import models, schemas
