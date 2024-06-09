@@ -79,7 +79,7 @@ Resources:
         - subnet-00326eed251a41661
         - subnet-0d6d5af9444661658
         - subnet-0d1cd1f453b97c1dd
-      VpcConnectorName: !Sub "${Project}-${Stage}-vpc-connector"
+      VpcConnectorName: !Sub "${Project}-${Stage}"
 
 
   AppRunnerService:
