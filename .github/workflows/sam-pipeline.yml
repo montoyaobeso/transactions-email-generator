@@ -12,6 +12,7 @@ on:
       - 'requirements.txt'
       - 'docker/**'
       - 'apprunner.yaml'
+      - 'server.py'
 
 jobs:
   test:
