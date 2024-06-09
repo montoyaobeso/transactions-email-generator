@@ -11,6 +11,7 @@ on:
       - 'samconfig.toml'
       - 'requirements.txt'
       - 'docker/**'
+      - 'apprunner.yaml'
 
 jobs:
   test:

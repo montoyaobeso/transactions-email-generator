@@ -1,10 +1,11 @@
 version: 1.0
-runtime: python3.11
+runtime: python3
 build:
   commands:
     build:      
-      - "pip install -r requirements.txt"
+      - pip install -r requirements.txt
 run: 
-  command: "uvicorn src.api.main:app"
+  runtime-version: 3.11
+  command: uvicorn src.api.main:app
   network:
-    port: 8080
+    port: 80
