@@ -14,3 +14,4 @@ run:
   command: python server.py
   network:
     port: 8080
+    env: PORT
