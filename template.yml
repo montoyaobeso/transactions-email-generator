@@ -116,6 +116,9 @@ Resources:
                 -
                   Name: STAGE
                   Value: !Ref Stage
+                - 
+                  Name: PORT
+                  Value: 8080
       InstanceConfiguration:
         Cpu: 1 vCPU
         Memory: 2 GB
