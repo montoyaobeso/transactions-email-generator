@@ -20,6 +20,6 @@ run:
       value: 'dev'
   secrets:
     - name: stori-database-credentials
-      value_from: "arn:aws:secretsmanager:us-west-2:339713191966:secret:stori-database-credentials-cEeXnx"
+      value-from: "arn:aws:secretsmanager:us-west-2:339713191966:secret:stori-database-credentials-cEeXnx"
     - name: stori-sendgrid
-      value_from: "arn:aws:secretsmanager:us-west-2:339713191966:secret:stori-sendgrid-8LzFPs"
+      value-from: "arn:aws:secretsmanager:us-west-2:339713191966:secret:stori-sendgrid-8LzFPs"
