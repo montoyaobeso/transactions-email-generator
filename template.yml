@@ -84,7 +84,11 @@ Resources:
   AppRunnerService:
     Type: AWS::AppRunner::Service
     Properties:
-      ServiceName: !Sub "stori-api-app-runner"
+      ServiceName: !Sub "stori-api-app-runner-${Stage}"
+      InstanceConfiguration:
+        Cpu: 1 vCPU
+        Memory: 2 GB
+        InstanceRoleArn: !Sub "arn:aws:iam::${AWS::AccountId}:role/stori-instance-role-app-runner-${Stage}"
       NetworkConfiguration:
         EgressConfiguration: 
           EgressType: VPC
@@ -122,13 +126,10 @@ Resources:
                 -
                   Name: APP_RUNNER_SECRETS
                   Value: "arn:aws:secretsmanager:us-west-2:339713191966:secret:stori-app-runner-secrets-6Zk2vI"
-      InstanceConfiguration:
-        Cpu: 1 vCPU
-        Memory: 2 GB
-        InstanceRoleArn: !Sub "arn:aws:iam::${AWS::AccountId}:role/stori-instance-role-app-runner-${Stage}"
+
 
 Outputs:
   ApiUrl:
     Description: API endpoint URL
     Value:
-      Fn::Sub: 'https://${Api}.execute-api.${AWS::Region}.${AWS::URLSuffix}/'`
+      Fn::Sub: 'https://${Api}.execute-api.${AWS::Region}.${AWS::URLSuffix}/'
