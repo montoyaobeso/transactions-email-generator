@@ -1,7 +1,18 @@
 import fastapi, uvicorn
+from fastapi.responses import JSONResponse
 import os
 
 api = fastapi.FastAPI()
+
+
+@api.get("/")
+async def root():
+    """Get a welcome messge from the API."""
+    return JSONResponse(
+        content={"message": "Welcome to transactions email generator API."},
+        status_code=200,
+    )
+
 
 ...
 
