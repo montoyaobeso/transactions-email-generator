@@ -96,7 +96,7 @@ Resources:
       SourceConfiguration:
         AuthenticationConfiguration:
           ConnectionArn: !Ref AppRunnerConnectionArn
-        AutoDeploymentsEnabled: true
+        AutoDeploymentsEnabled: false
         CodeRepository:
           RepositoryUrl: "https://github.com/montoyaobeso/transactions-email-generator"
           SourceCodeVersion:
