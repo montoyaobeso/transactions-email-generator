@@ -1,3 +1,4 @@
+import json
 import os
 
 import sendgrid
@@ -17,7 +18,7 @@ class EmailSender:
         """Set credentials from AWS SecretsManager or Env variables."""
 
         if "APP_RUNNER_SECRETS" in os.environ:
-            secrets = os.environ["APP_RUNNER_SECRETS"]
+            secrets = json.loads(os.environ["APP_RUNNER_SECRETS"])
         else:
             secrets = get_secret(os.environ["SECRET_NAME"])
 

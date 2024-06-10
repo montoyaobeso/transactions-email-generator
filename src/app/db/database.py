@@ -1,3 +1,4 @@
+import json
 import os
 
 from sqlalchemy import create_engine
@@ -7,7 +8,7 @@ from src.app.aws.secrets import get_secret
 
 if os.environ["STAGE"] != "local":
     if "APP_RUNNER_SECRETS" in os.environ:
-        db_credentials = os.environ["APP_RUNNER_SECRETS"]
+        db_credentials = json.loads(os.environ["APP_RUNNER_SECRETS"])
     else:
         db_credentials = get_secret("stori-database-credentials")
 
