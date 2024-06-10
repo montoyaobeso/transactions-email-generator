@@ -101,6 +101,14 @@ Resources:
             Value: !Ref Stage
           CodeConfiguration:
             ConfigurationSource: REPOSITORY
+            CodeConfigurationValues:
+              RuntimeEnvironmentSecrets:
+                -
+                  Name: stori-database-credentials
+                  Value: "arn:aws:secretsmanager:us-west-2:339713191966:secret:stori-database-credentials-cEeXnx"
+                -
+                  Name: stori-sendgrid
+                  Value: "arn:aws:secretsmanager:us-west-2:339713191966:secret:stori-sendgrid-8LzFPs"
       InstanceConfiguration:
         Cpu: 1 vCPU
         Memory: 2 GB
