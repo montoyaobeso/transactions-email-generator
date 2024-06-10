@@ -103,9 +103,9 @@ Resources:
             Type: BRANCH
             Value: !Ref Stage
           CodeConfiguration:
-            ConfigurationSource: API
+            ConfigurationSource: REPOSITORY
             CodeConfigurationValues:
-              Runtime: PYTHON_311
+              Runtime: PYTHON_3
               BuildCommand: "pip3 install -r requirements.txt"
               StartCommand: "python3 server.py"
               Port: 8080
