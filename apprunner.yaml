@@ -7,6 +7,12 @@ build:
   env:
     - name: PORT
       value: '8080'
+    - name: BUCKET_NAME
+      value: 'transactions-email-sender-files-dev'
+    - name: SECRET_NAME
+      value: 'stori-sendgrid'
+    - name: STAGE
+      value: 'dev'
 run:   
   command: python server.py
   network:

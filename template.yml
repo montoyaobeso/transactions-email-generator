@@ -100,19 +100,7 @@ Resources:
             Type: BRANCH
             Value: !Ref Stage
           CodeConfiguration:
-            ConfigurationSource: API
-            CodeConfigurationValues:
-              Runtime: PYTHON_3
-              RuntimeEnvironmentVariables:
-                -
-                  Name: BUCKET_NAME
-                  Value: !Ref BucketName
-                -
-                  Name: SECRET_NAME
-                  Value: !Ref SecretName
-                -
-                  Name: STAGE
-                  Value: !Ref Stage
+            ConfigurationSource: REPOSITORY
       InstanceConfiguration:
         Cpu: 1 vCPU
         Memory: 2 GB
