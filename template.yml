@@ -82,46 +82,46 @@ Resources:
       VpcConnectorName: !Sub "${Project}-${Stage}"
 
 
-  # AppRunnerService:
-  #   Type: AWS::AppRunner::Service
-  #   Properties:
-  #     ServiceName: !Sub "stori-api-app-runner"
-  #     NetworkConfiguration:
-  #       EgressConfiguration: 
-  #         EgressType: VPC
-  #         VpcConnectorArn: !Ref AppRunnerVPCConnector
-  #     SourceConfiguration:
-  #       AuthenticationConfiguration:
-  #         ConnectionArn: !Ref AppRunnerConnectionArn
-  #       AutoDeploymentsEnabled: true
-  #       CodeRepository:
-  #         RepositoryUrl: "https://github.com/montoyaobeso/transactions-email-generator"
-  #         SourceCodeVersion:
-  #           Type: BRANCH
-  #           Value: !Ref Stage
-  #         CodeConfiguration:
-  #           ConfigurationSource: API
-  #           CodeConfigurationValues:
-  #             Runtime: PYTHON_3
-  #             BuildCommand: "pip install -r requirements.txt"
-  #             StartCommand: "python server.py"
-  #             Port: 8080
-  #             RuntimeEnvironmentVariables:
-  #               -
-  #                 Name: BUCKET_NAME
-  #                 Value: !Ref BucketName
-  #               -
-  #                 Name: SECRET_NAME
-  #                 Value: !Ref SecretName
-  #               -
-  #                 Name: STAGE
-  #                 Value: !Ref Stage
-  #               - 
-  #                 Name: PORT
-  #                 Value: 8080
-  #     InstanceConfiguration:
-  #       Cpu: 1 vCPU
-  #       Memory: 2 GB
+  AppRunnerService:
+    Type: AWS::AppRunner::Service
+    Properties:
+      ServiceName: !Sub "stori-api-app-runner"
+      NetworkConfiguration:
+        EgressConfiguration: 
+          EgressType: VPC
+          VpcConnectorArn: !Ref AppRunnerVPCConnector
+      SourceConfiguration:
+        AuthenticationConfiguration:
+          ConnectionArn: !Ref AppRunnerConnectionArn
+        AutoDeploymentsEnabled: true
+        CodeRepository:
+          RepositoryUrl: "https://github.com/montoyaobeso/transactions-email-generator"
+          SourceCodeVersion:
+            Type: BRANCH
+            Value: !Ref Stage
+          CodeConfiguration:
+            ConfigurationSource: API
+            CodeConfigurationValues:
+              Runtime: PYTHON_3
+              BuildCommand: "pip install -r requirements.txt"
+              StartCommand: "python server.py"
+              Port: 8080
+              RuntimeEnvironmentVariables:
+                -
+                  Name: BUCKET_NAME
+                  Value: !Ref BucketName
+                -
+                  Name: SECRET_NAME
+                  Value: !Ref SecretName
+                -
+                  Name: STAGE
+                  Value: !Ref Stage
+                - 
+                  Name: PORT
+                  Value: 8080
+      InstanceConfiguration:
+        Cpu: 1 vCPU
+        Memory: 2 GB
 
 Outputs:
   ApiUrl:
