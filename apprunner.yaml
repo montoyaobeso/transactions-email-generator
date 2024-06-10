@@ -8,9 +8,6 @@ build:
     - name: PORT
       value: '8080'
 run:   
-  pre-run:
-    - echo "Installing dependencies..."
-    - pip install -r requirements.txt
   command: python server.py
   network:
     port: 8080
