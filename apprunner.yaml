@@ -1,0 +1,20 @@
+version: 1.0
+runtime: python311
+build:
+  commands:
+    build:        
+      - pip3 install -r requirements.txt
+      - pipenv install
+
+run:
+  runtime-version: 3.11
+  command: python3 server.py
+  network: 
+    port: 8000
+    env: SERVER_PORT  
+  env:
+    - name: STAGE
+      value: "dev"
+  secrets:
+    - name: APP
+      value-from: "arn:aws:secretsmanager:us-west-2:339713191966:secret:stori-app-secrets-dev-SlWppu"

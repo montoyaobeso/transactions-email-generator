@@ -104,28 +104,28 @@ Resources:
             Value: !Ref Stage
           CodeConfiguration:
             ConfigurationSource: REPOSITORY
-            CodeConfigurationValues:
-              Runtime: PYTHON_3
-              BuildCommand: "pip3 install -r requirements.txt"
-              StartCommand: "python3 server.py"
-              Port: 8080
-              RuntimeEnvironmentVariables:
-                -
-                  Name: SERVER_PORT
-                  Value: 8080
-                -
-                  Name: STAGE
-                  Value: !Ref Stage
-                -
-                  Name: BUCKET_NAME
-                  Value: !Ref BucketName
-                -
-                  Name: SECRET_NAME
-                  Value: !Ref SecretName
-              RuntimeEnvironmentSecrets:
-                -
-                  Name: APP_RUNNER_SECRETS
-                  Value: !Sub "arn:aws:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:stori-app-runner-secrets-6Zk2vI"
+            # CodeConfigurationValues:
+            #   Runtime: PYTHON_3
+            #   BuildCommand: "pip3 install -r requirements.txt"
+            #   StartCommand: "python3 server.py"
+            #   Port: 8080
+            #   RuntimeEnvironmentVariables:
+            #     -
+            #       Name: SERVER_PORT
+            #       Value: 8080
+            #     -
+            #       Name: STAGE
+            #       Value: !Ref Stage
+            #     -
+            #       Name: BUCKET_NAME
+            #       Value: !Ref BucketName
+            #     -
+            #       Name: SECRET_NAME
+            #       Value: !Ref SecretName
+            #   RuntimeEnvironmentSecrets:
+            #     -
+            #       Name: APP_RUNNER_SECRETS
+            #       Value: !Sub "arn:aws:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:stori-app-runner-secrets-6Zk2vI"
 
 
 Outputs:
