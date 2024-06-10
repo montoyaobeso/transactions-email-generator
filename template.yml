@@ -106,8 +106,8 @@ Resources:
             ConfigurationSource: API
             CodeConfigurationValues:
               Runtime: PYTHON_311
-              BuildCommand: "python3.11 -m pip install -r requirements.txt"
-              StartCommand: "python server.py"
+              BuildCommand: "pip3 install -r requirements.txt"
+              StartCommand: "python3 server.py"
               Port: 8080
               RuntimeEnvironmentVariables:
                 -
