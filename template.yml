@@ -99,30 +99,30 @@ Resources:
           SourceCodeVersion:
             Type: BRANCH
             Value: !Ref Stage
-      CodeConfiguration:
-        ConfigurationSource: API
-        CodeConfigurationValues:
-          Runtime: PYTHON_3
-          BuildCommand: "pip install -r requirements.txt"
-          StartCommand: "python server.py"
-          Port: 8080
-          RuntimeEnvironmentVariables:
-            -
-              Name: BUCKET_NAME
-              Value: !Ref BucketName
-            -
-              Name: SECRET_NAME
-              Value: !Ref SecretName
-            -
-              Name: STAGE
-              Value: !Ref Stage
-          RuntimeEnviromentSecrets:
-            -
-              Name: stori-sendgrid
-              Value: "arn:aws:secretsmanager:us-west-2:339713191966:secret:stori-sendgrid-8LzFPs"
-            -
-              Name: stori-database-credentials
-              Value: "arn:aws:secretsmanager:us-west-2:339713191966:secret:stori-database-credentials-cEeXnx"
+          CodeConfiguration:
+            ConfigurationSource: API
+            CodeConfigurationValues:
+              Runtime: PYTHON_3
+              BuildCommand: "pip install -r requirements.txt"
+              StartCommand: "python server.py"
+              Port: 8080
+              RuntimeEnvironmentVariables:
+                -
+                  Name: BUCKET_NAME
+                  Value: !Ref BucketName
+                -
+                  Name: SECRET_NAME
+                  Value: !Ref SecretName
+                -
+                  Name: STAGE
+                  Value: !Ref Stage
+              RuntimeEnviromentSecrets:
+                -
+                  Name: stori-sendgrid
+                  Value: "arn:aws:secretsmanager:us-west-2:339713191966:secret:stori-sendgrid-8LzFPs"
+                -
+                  Name: stori-database-credentials
+                  Value: "arn:aws:secretsmanager:us-west-2:339713191966:secret:stori-database-credentials-cEeXnx"
       InstanceConfiguration:
         Cpu: 1 vCPU
         Memory: 2 GB
