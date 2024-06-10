@@ -101,8 +101,8 @@ Resources:
           CodeConfiguration:
             ConfigurationSource: API
             CodeConfigurationValues:
-              Runtime: PYTHON_3
-              BuildCommand: "pip install -r requirements.txt"
+              Runtime: PYTHON_311
+              BuildCommand: "python -m pip install -r requirements.txt"
               StartCommand: "python server.py"
               Port: 8080
               RuntimeEnvironmentVariables:
@@ -131,4 +131,4 @@ Outputs:
   ApiUrl:
     Description: API endpoint URL
     Value:
-      Fn::Sub: 'https://${Api}.execute-api.${AWS::Region}.${AWS::URLSuffix}/'
+      Fn::Sub: 'https://${Api}.execute-api.${AWS::Region}.${AWS::URLSuffix}/'`
