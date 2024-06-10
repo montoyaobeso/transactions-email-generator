@@ -12,10 +12,10 @@ if os.environ["STAGE"] != "local":
     else:
         db_credentials = get_secret("stori-database-credentials")
 
-    os.environ["POSTGRES_USER"] = db_credentials["username"]
-    os.environ["POSTGRES_PASSWORD"] = db_credentials["password"]
-    os.environ["POSTGRES_HOST"] = db_credentials["host"]
-    os.environ["POSTGRES_DB"] = db_credentials["database"]
+    os.environ["POSTGRES_USER"] = db_credentials["POSTGRES_USER"]
+    os.environ["POSTGRES_PASSWORD"] = db_credentials["POSTGRES_PASSWORD"]
+    os.environ["POSTGRES_HOST"] = db_credentials["POSTGRES_HOST"]
+    os.environ["POSTGRES_DB"] = db_credentials["POSTGRES_DB"]
 
 SQLALCHEMY_DATABASE_URL = f"postgresql://{os.environ['POSTGRES_USER']}:{os.environ['POSTGRES_PASSWORD']}@{os.environ['POSTGRES_HOST']}/{os.environ['POSTGRES_DB']}"
 
