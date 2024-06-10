@@ -106,7 +106,7 @@ Resources:
             ConfigurationSource: API
             CodeConfigurationValues:
               Runtime: PYTHON_311
-              BuildCommand: "python -m pip install -r requirements.txt"
+              BuildCommand: "python3.11 -m pip install -r requirements.txt"
               StartCommand: "python server.py"
               Port: 8080
               RuntimeEnvironmentVariables:
@@ -125,7 +125,7 @@ Resources:
               RuntimeEnvironmentSecrets:
                 -
                   Name: APP_RUNNER_SECRETS
-                  Value: "arn:aws:secretsmanager:us-west-2:339713191966:secret:stori-app-runner-secrets-6Zk2vI"
+                  Value: !Sub "arn:aws:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:stori-app-runner-secrets-6Zk2vI"
 
 
 Outputs:
