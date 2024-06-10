@@ -37,7 +37,6 @@ app.include_router(send_balance.router)
 
 if __name__ == "__main__":
     print("Starting webserver...")
-    print(os.environ.keys())
     uvicorn.run(
         app,
         host="0.0.0.0",
