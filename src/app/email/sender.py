@@ -13,12 +13,16 @@ class EmailSender:
         self.recipient = recipient
         self.body_content = body_content
 
-    def set_credentials_from_aws_secrets(self):
-        """Set credentials from AWS SecretsManager."""
+    def set_credentials(self):
+        """Set credentials from AWS SecretsManager or Env variables."""
 
-        secret = get_secret(os.environ["SECRET_NAME"])
-        os.environ["SENDGRID_SENDER_EMAIL"] = secret["SENDGRID_SENDER_EMAIL"]
-        os.environ["SENDGRID_API_KEY"] = secret["SENDGRID_API_KEY"]
+        if "APP_RUNNER_SECRETS" in os.environ:
+            secrets = os.environ["APP_RUNNER_SECRETS"]
+        else:
+            secrets = get_secret(os.environ["SECRET_NAME"])
+
+        os.environ["SENDGRID_SENDER_EMAIL"] = secrets["SENDGRID_SENDER_EMAIL"]
+        os.environ["SENDGRID_API_KEY"] = secrets["SENDGRID_API_KEY"]
 
     def send_email(self) -> None:
         """Send email to recipient."""
@@ -27,7 +31,7 @@ class EmailSender:
             "SENDGRID_SENDER_EMAIL" not in os.environ
             or "SENDGRID_API_KEY" not in os.environ
         ):
-            self.set_credentials_from_aws_secrets()
+            self.set_credentials()
 
         sender = os.environ["SENDGRID_SENDER_EMAIL"]
         sg = sendgrid.SendGridAPIClient(api_key=os.environ["SENDGRID_API_KEY"])
