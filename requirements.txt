@@ -4,7 +4,7 @@ python-multipart==0.0.9
 pandas
 pandera==0.19.3
 sendgrid==6.11.0
-psycopg2-binary==2.8.6
+psycopg2-binary==2.9.9
 sqlalchemy==2.0.30
 boto3==1.34.117
 botocore==1.34.117
