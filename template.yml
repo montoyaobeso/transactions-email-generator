@@ -86,6 +86,10 @@ Resources:
     Type: AWS::AppRunner::Service
     Properties:
       ServiceName: !Sub "stori-api-app-runner"
+      NetworkConfiguration:
+        EgressConfiguration: 
+          EgressType: VPC
+          VpcConnectorArn: !Ref AppRunnerVPCConnector
       SourceConfiguration:
         AuthenticationConfiguration:
           ConnectionArn: !Ref AppRunnerConnectionArn
@@ -111,10 +115,7 @@ Resources:
                   Value: !Ref Stage
       InstanceConfiguration:
         Cpu: 1 vCPU
-        Memory: 3 GB
-
-
-
+        Memory: 2 GB
 
 Outputs:
   ApiUrl:
