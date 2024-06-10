@@ -7,13 +7,13 @@ load_dotenv()
 
 
 from src.api.routers import (
-    account,
-    load_transactions,
-    load_transactions_s3,
-    presiged_url,
+    # account,
+    # load_transactions,
+    # load_transactions_s3,
+    # presiged_url,
     root,
-    send_balance,
-    transaction,
+    # send_balance,
+    # transaction,
 )
 
 app = FastAPI(
@@ -27,12 +27,12 @@ app = FastAPI(
 )
 
 app.include_router(root.router)
-app.include_router(account.router)
-app.include_router(transaction.router)
-app.include_router(presiged_url.router)
-app.include_router(load_transactions.router)
-app.include_router(load_transactions_s3.router)
-app.include_router(send_balance.router)
+# app.include_router(account.router)
+# app.include_router(transaction.router)
+# app.include_router(presiged_url.router)
+# app.include_router(load_transactions.router)
+# app.include_router(load_transactions_s3.router)
+# app.include_router(send_balance.router)
 
 
 if __name__ == "__main__":
