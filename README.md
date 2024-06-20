@@ -130,7 +130,7 @@ Note that for this command a virtual volume mapping is provided to mount `csv` l
 
 ### Send Balance
 ```bash
-docker run -v transactions-email-generator-app:latest send_balance --account-id 1
+docker run transactions-email-generator-app:latest send_balance --account-id 1
 ```
 
 ## Endpoints
