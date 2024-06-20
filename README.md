@@ -33,8 +33,12 @@ A simple CLI is available, offering:
 ### API Deployment
 
 The API is deployed on AWS, providing:
+- Basic endpoints to manage accounts and transactions.
+- Endpoints to create presigned urls to upload files to S3.
+- Endpoints to process transactions files.
+- Endpoint to send account balances by email.
 
-AWS Integration: Works seamlessly with other AWS services, such as:
+AWS Integration:
 - **AWS S3**: For storing and retrieving CSV files.
 - **AWS SecretsManager**: For secure credentials storage.
 - **AWS RDS (PostgreSQL)**: For database management.
